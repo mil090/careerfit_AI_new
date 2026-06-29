@@ -10,3 +10,5 @@ GitHub Desktop을 설치하고, VSCode를 이용하여 readme.md를 편집하고
 GitHub Desktop과 온라인 GitHub 사이트에도 이 내용이 반영됨을 확인할 수 있다.
 
 ~~GitHub 사용과 마크다운 편집에 익숙해지도록 하자~~
+
+__commit, push는 VSCode 말고 GitHub Desktop에서 하는 걸로__
