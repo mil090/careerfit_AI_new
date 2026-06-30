@@ -18,6 +18,10 @@ class AnalyzeRequest(BaseModel):
 
     job_type: str        # 관심 직무 (예: "데이터 분석")
 
+    experience_years: int = 0 # 경력 연수, 0이면 신입
+
+    preferred_company_size: str = "무관" # 무관 / 대기업 / 중견기업 / 스타트업 중 하나
+
 # 응답 본문(Response Body) 모델
 
 # 주방에서 손님에게 돌려주는 영수증 양식
