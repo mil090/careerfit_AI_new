@@ -63,3 +63,41 @@ if __name__ == "__main__":
  print("=== 처음 3행 미리보기 ===")
 
  print(df_jobs.head(3).to_string())
+
+# 결측치 확인 함수 추가
+
+ def check_missing(df: pd.DataFrame) -> pd.DataFrame:
+
+    """
+
+    각 컬럼의 결측치(빈값) 수와 비율을 확인합니다.
+
+    요리 비유: 재료 중 빠진 것이 있는지 확인하는 단계입니다.
+
+    """
+
+    print("\n=== 결측치 확인 ===")
+
+    missing = df.isnull().sum()
+
+    missing_pct = (df.isnull().sum() / len(df) * 100).round(1)
+
+    result = pd.DataFrame({
+
+        "결측치 수": missing,
+
+        "결측치 비율(%)": missing_pct
+
+    })
+
+    print(result[result["결측치 수"] > 0])  # 결측치 있는 컬럼만 출력
+
+    if missing.sum() == 0:
+
+        print("   ✅ 결측치 없음")
+
+    else:
+
+        print(f"   ⚠️  총 {missing.sum()}개 결측치 발견")
+
+    return df
