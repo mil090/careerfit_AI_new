@@ -244,6 +244,33 @@ def standardize_skills(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+# SQLite 저장 함수 추가
+
+def save_to_sqlite(df: pd.DataFrame, db_path: str) -> None:
+    """
+    전처리된 DataFrame을 SQLite 데이터베이스에 저장합니다.
+
+    요리 비유:
+    손질이 끝난 재료를 냉장고(SQLite)에 정리해서 넣는 단계입니다.
+    """
+    print(f"\n=== SQLite 저장 ===")
+
+    conn = sqlite3.connect(db_path)
+
+    # DataFrame을 SQL 테이블로 저장
+    # if_exists="replace": 테이블이 이미 있으면 덮어씁니다
+    df.to_sql("jobs", conn, if_exists="replace", index=False)
+
+    # 저장 확인
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM jobs")
+    count = cursor.fetchone()[0]
+
+    print(f"   ✅ 저장 완료: jobs 테이블에 {count}행 저장됨")
+    print(f"   파일 위치: {db_path}")
+
+    conn.close()
+
 # 실행 테스트
 
 if __name__ == "__main__":
@@ -266,5 +293,8 @@ if __name__ == "__main__":
 
     # 5. 스킬 표준화
     df_jobs = standardize_skills(df_jobs)
+
+    # 6. SQLite 저장
+    save_to_sqlite(df_jobs, DB_PATH)
 
     print(f"\n✅ 전처리 완료: 최종 {len(df_jobs)}행")
