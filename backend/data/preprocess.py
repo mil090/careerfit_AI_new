@@ -52,7 +52,7 @@ def load_data(filepath: str) -> pd.DataFrame:
 
 # 결측치 확인 함수 추가
 
- def check_missing(df: pd.DataFrame) -> pd.DataFrame:
+def check_missing(df: pd.DataFrame) -> pd.DataFrame:
 
     """
 
