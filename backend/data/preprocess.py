@@ -50,20 +50,6 @@ def load_data(filepath: str) -> pd.DataFrame:
 
     return df
 
-
-
-# 실행 테스트
-
-if __name__ == "__main__":
-
- df_jobs = load_data(JOBS_CSV)
-
- print()
-
- print("=== 처음 3행 미리보기 ===")
-
- print(df_jobs.head(3).to_string())
-
 # 결측치 확인 함수 추가
 
  def check_missing(df: pd.DataFrame) -> pd.DataFrame:
@@ -103,6 +89,7 @@ if __name__ == "__main__":
     return df
 
 # 결측치 처리 함수 추가
+
 def handle_missing(df: pd.DataFrame) -> pd.DataFrame:
     """
     결측치를 처리합니다.
@@ -128,6 +115,7 @@ def handle_missing(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 # 중복 확인 및 제거 함수 추가
+
 def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
 
     """
@@ -165,3 +153,25 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     print(f"   제거 후: {after}행 (제거: {before - after}행)")
 
     return df
+
+# 실행 테스트
+
+if __name__ == "__main__":
+
+    # 1. 읽기
+
+    df_jobs = load_data(JOBS_CSV)
+
+    # 2. 결측치 확인
+
+    df_jobs = check_missing(df_jobs)
+
+    # 3. 결측치 처리
+
+    df_jobs = handle_missing(df_jobs)
+
+    # 4. 중복 제거
+
+    df_jobs = remove_duplicates(df_jobs)
+
+    print(f"\n✅ 전처리 완료: 최종 {len(df_jobs)}행")
