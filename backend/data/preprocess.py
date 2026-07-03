@@ -44,6 +44,8 @@ def load_data(filepath: str) -> pd.DataFrame:
 
         print(f"✅ 파일 읽기 성공 (CP949): {filepath}")
 
+    df.columns = df.columns.str.strip()
+    
     print(f"   행 수: {len(df)}, 열 수: {len(df.columns)}")
 
     print(f"   컬럼: {df.columns.tolist()}")
