@@ -156,6 +156,94 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+# 표준화 사전: 왼쪽 → 오른쪽으로 변환합니다
+
+SKILL_NORMALIZATION = {
+
+    "python": "Python",
+
+    "sql": "SQL",
+
+    "ai": "AI",
+
+    "ml": "머신러닝",
+
+    "machine learning": "머신러닝",
+
+    "deep learning": "딥러닝",
+
+    "r": "R",         # 대소문자 주의
+
+    "js": "JavaScript",
+
+    "javascript": "JavaScript",
+
+    "tableau": "Tableau",
+
+    "powerbi": "Power BI",
+
+    "power bi": "Power BI",
+
+}
+
+def normalize_skills(skills_str: str) -> str:
+
+    """
+
+    스킬 키워드 문자열을 표준화합니다.
+
+    입력: "python, sql, Machine Learning"
+
+    출력: "Python, SQL, 머신러닝"
+
+    """
+
+    if not isinstance(skills_str, str) or not skills_str.strip():
+
+        return ""
+
+    skills = [s.strip() for s in skills_str.split(",")]
+
+    normalized = []
+
+    for skill in skills:
+
+        # 소문자로 변환해서 사전에서 찾기
+
+        lower = skill.lower()
+
+        # 사전에 있으면 표준화된 이름으로, 없으면 원래 값 유지
+
+        normalized.append(SKILL_NORMALIZATION.get(lower, skill))
+
+    return ", ".join(normalized)
+
+def standardize_skills(df: pd.DataFrame) -> pd.DataFrame:
+
+    """
+
+    required_skills, preferred_skills 컬럼 전체에 표준화를 적용합니다.
+
+    """
+
+    print("\n=== 스킬 키워드 표준화 ===")
+
+    for col in ["required_skills", "preferred_skills"]:
+
+        if col in df.columns:
+
+            df[col] = df[col].apply(normalize_skills)
+
+    print(" ✅ 표준화 완료")
+
+    # 표준화 결과 샘플 출력
+
+    print("\n [표준화 전후 비교 샘플]")
+
+    print(df[["title", "required_skills"]].head(3).to_string())
+
+    return df
+
 # 실행 테스트
 
 if __name__ == "__main__":
@@ -175,5 +263,8 @@ if __name__ == "__main__":
     # 4. 중복 제거
 
     df_jobs = remove_duplicates(df_jobs)
+
+    # 5. 스킬 표준화
+    df_jobs = standardize_skills(df_jobs)
 
     print(f"\n✅ 전처리 완료: 최종 {len(df_jobs)}행")
