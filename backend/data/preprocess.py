@@ -101,3 +101,28 @@ if __name__ == "__main__":
         print(f"   ⚠️  총 {missing.sum()}개 결측치 발견")
 
     return df
+
+# 결측치 처리 함수 추가
+def handle_missing(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    결측치를 처리합니다.
+    - 텍스트 컬럼: 빈 문자열로 채웁니다
+    - 핵심 컬럼이 비어있는 행은 제거합니다
+    """
+    print("\n=== 결측치 처리 ===")
+    before = len(df)
+
+    # 핵심 컬럼(title, required_skills)이 비어있는 행 제거
+    # 이 정보가 없으면 RAG 검색에 의미가 없기 때문입니다
+    df = df.dropna(subset=["title", "required_skills"])
+
+    # 나머지 텍스트 컬럼은 빈 문자열로 채웁니다
+    text_cols = ["preferred_skills", "description", "company", "job_type"]
+    for col in text_cols:
+        if col in df.columns:
+            df[col] = df[col].fillna("")
+
+    after = len(df)
+    print(f"   처리 전: {before}행 → 처리 후: {after}행")
+    print(f"   제거된 행: {before - after}행")
+    return df
