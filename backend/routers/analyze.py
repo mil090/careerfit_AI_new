@@ -4,6 +4,8 @@ from pydantic import BaseModel
 
 from typing import List
 
+from services.llm_service import get_llm_response
+
 router = APIRouter()
 
 # 요청 본문(Request Body) 모델
