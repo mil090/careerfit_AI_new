@@ -271,6 +271,45 @@ def save_to_sqlite(df: pd.DataFrame, db_path: str) -> None:
 
     conn.close()
 
+# SQLite 조회 함수 추가
+
+def query_sqlite(db_path: str) -> None:
+    """
+    SQLite에서 데이터를 조회해 저장 결과를 확인합니다.
+    """
+    print(f"\n=== SQLite 조회 테스트 ===")
+    conn = sqlite3.connect(db_path)
+
+    # 1. 전체 행 수
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM jobs")
+    print(f"   전체 공고 수: {cursor.fetchone()[0]}개")
+
+    # 2. 직무 분류별 개수
+    print("\n   [직무 분류별 공고 수]")
+    cursor.execute("""
+        SELECT job_type, COUNT(*) as count
+        FROM jobs
+        GROUP BY job_type
+        ORDER BY count DESC
+    """)
+    for row in cursor.fetchall():
+        print(f"   - {row[0]}: {row[1]}개")
+
+    # 3. Python 필수 스킬 공고만 조회
+    print("\n   [Python이 필요한 공고]")
+    cursor.execute("""
+        SELECT company, title, required_skills
+        FROM jobs
+        WHERE required_skills LIKE '%Python%'
+        LIMIT 3
+    """)
+    for row in cursor.fetchall():
+        print(f"   - {row[0]} | {row[1]}")
+        print(f"     스킬: {row[2]}")
+
+    conn.close()
+
 # 실행 테스트
 
 if __name__ == "__main__":
@@ -296,5 +335,8 @@ if __name__ == "__main__":
 
     # 6. SQLite 저장
     save_to_sqlite(df_jobs, DB_PATH)
+
+    # 7. SQLite 조회
+    query_sqlite(DB_PATH)
 
     print(f"\n✅ 전처리 완료: 최종 {len(df_jobs)}행")
