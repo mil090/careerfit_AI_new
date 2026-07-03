@@ -126,3 +126,42 @@ def handle_missing(df: pd.DataFrame) -> pd.DataFrame:
     print(f"   처리 전: {before}행 → 처리 후: {after}행")
     print(f"   제거된 행: {before - after}행")
     return df
+
+# 중복 확인 및 제거 함수 추가
+def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
+
+    """
+
+    중복 행을 확인하고 제거합니다.
+
+    company + title 조합이 같으면 중복으로 판단합니다.
+
+    """
+
+    print("\n=== 중복 확인 ===")
+
+    before = len(df)
+
+    # company + title 기준으로 중복 확인
+
+    duplicated = df.duplicated(subset=["company", "title"], keep=False)
+
+    if duplicated.sum() > 0:
+
+        print(f"   ⚠️  중복 발견: {duplicated.sum()}행")
+
+        print(df[duplicated][["company", "title"]])
+
+    else:
+
+        print("   ✅ 중복 없음")
+
+    # 첫 번째 행만 남기고 중복 제거
+
+    df = df.drop_duplicates(subset=["company", "title"], keep="first")
+
+    after = len(df)
+
+    print(f"   제거 후: {after}행 (제거: {before - after}행)")
+
+    return df
