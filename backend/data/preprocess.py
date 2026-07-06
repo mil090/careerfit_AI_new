@@ -246,6 +246,16 @@ def standardize_skills(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+# 고유 ID 부여 함수 추가
+
+def add_ids(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    DataFrame에 고유 ID 컬럼을 추가합니다.
+    """
+    print("\n=== 고유 ID 추가 ===")
+    df["id"] = df.index + 1
+    return df
+
 # SQLite 저장 함수 추가
 
 def save_to_sqlite(df: pd.DataFrame, db_path: str) -> None:
@@ -390,6 +400,10 @@ if __name__ == "__main__":
     # 4. 중복 제거
 
     df_jobs = remove_duplicates(df_jobs)
+
+    # 4.5. 고유 ID 부여
+    
+    df_jobs = add_ids(df_jobs)
 
     # 5. 스킬 표준화
 
