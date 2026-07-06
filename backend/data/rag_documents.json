@@ -2,7 +2,7 @@
   {
     "text": "넥스트데이터랩에서 데이터 분석가를 채용합니다. 필수 스킬은 Python;SQL;Pandas;통계입니다. 우대 스킬: Tableau;Power BI;Git. 업무 내용: 서비스 로그와 사용자 데이터를 분석하여 인사이트를 도출하고 대시보드 및 분석 리포트를 작성합니다.",
     "metadata": {
-      "id": "",
+      "id": "1",
       "company": "넥스트데이터랩",
       "title": "데이터 분석가",
       "job_type": "데이터 분석",
@@ -12,12 +12,12 @@
       "is_startup": "false",
       "first_saved_date": "2026-07-06"
     },
-    "doc_id": "job_"
+    "doc_id": "job_1"
   },
   {
     "text": "스마트커머스솔루션에서 BI 데이터 분석가를 채용합니다. 필수 스킬은 SQL;Python;Excel입니다. 우대 스킬: Looker Studio;BigQuery;A/B Test. 업무 내용: 이커머스 데이터를 기반으로 매출과 고객 행동을 분석하고 의사결정을 위한 지표를 관리합니다.",
     "metadata": {
-      "id": "",
+      "id": "2",
       "company": "스마트커머스솔루션",
       "title": "BI 데이터 분석가",
       "job_type": "데이터 분석",
@@ -27,12 +27,12 @@
       "is_startup": "false",
       "first_saved_date": "2026-07-06"
     },
-    "doc_id": "job_"
+    "doc_id": "job_2"
   },
   {
     "text": "에이아이인사이트테크에서 주니어 데이터 사이언티스트를 채용합니다. 필수 스킬은 Python;SQL;Machine Learning;통계입니다. 우대 스킬: Scikit-learn;Docker;Git. 업무 내용: 데이터 전처리와 예측 모델 개발을 지원하고 다양한 비즈니스 문제 해결 프로젝트에 참여합니다.",
     "metadata": {
-      "id": "",
+      "id": "3",
       "company": "에이아이인사이트테크",
       "title": "주니어 데이터 사이언티스트",
       "job_type": "데이터 분석",
@@ -42,6 +42,6 @@
       "is_startup": "false",
       "first_saved_date": "2026-07-06"
     },
-    "doc_id": "job_"
+    "doc_id": "job_3"
   }
 ]
