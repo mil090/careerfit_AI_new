@@ -43,3 +43,8 @@ dist/
 .DS_Store
 
 Thumbs.db
+
+# Continue local config - may contain API keys
+.continue/config.yaml
+.continue/*.yaml
+.continue/*.json
