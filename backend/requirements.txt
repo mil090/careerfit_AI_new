@@ -21,3 +21,7 @@ requests==2.34.2
 # HuggingFace 사용 시 필요
 
 huggingface_hub==0.36.2
+
+tokenizers==0.20.3 # ChromaDB 에 필요 (버전 충돌 해결)
+
+requests-oauthlib==2.0.0
